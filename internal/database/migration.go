@@ -15,5 +15,9 @@ func RunMigration(ctx context.Context) (err error) {
 	if err != nil {
 		return
 	}
+	err = Conn.Exec(ctx, query.CreateTireTable)
+	if err != nil {
+		return
+	}
 	return
 }

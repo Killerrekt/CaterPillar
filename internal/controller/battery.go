@@ -13,8 +13,8 @@ import (
 	"github.com/google/uuid"
 )
 
-func InsertTire(c *fiber.Ctx) error {
-	var req model.InsertTire
+func InsertBattery(c *fiber.Ctx) error {
+	var req model.InsertBattery
 	if err := c.BodyParser(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(model.Response{Message: "Failed to parse the json", Status: false})
 	}
@@ -25,7 +25,7 @@ func InsertTire(c *fiber.Ctx) error {
 	}
 
 	ctx := context.Background()
-	err := services.InsertTire(ctx, req)
+	err := services.InsertBattery(ctx, req)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(model.Response{Message: "Something went wrong", Status: false})
 	}
@@ -33,7 +33,7 @@ func InsertTire(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusAccepted).JSON(model.Response{Message: "Inserted successfully", Status: true})
 }
 
-func GetTire(c *fiber.Ctx) error {
+func GetBattery(c *fiber.Ctx) error {
 	id := c.Params("inspection_id", "")
 	if id == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(model.Response{Message: "Bad request alert", Status: false})
@@ -44,7 +44,7 @@ func GetTire(c *fiber.Ctx) error {
 	}
 
 	ctx := context.Background()
-	tire, err := services.GetTire(ctx, uint32(uint_id))
+	tire, err := services.GetBattery(ctx, uint32(uint_id))
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(model.Response{Message: "Something went wrong", Status: false})
 	}
@@ -52,13 +52,13 @@ func GetTire(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusAccepted).JSON(model.Response{Message: "Successfully fetch the detail", Status: true, Data: tire})
 }
 
-func UploadTireImage(c *fiber.Ctx) error {
+func UploadBatteryImage(c *fiber.Ctx) error {
 	files, err := c.MultipartForm()
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(model.Response{Message: "No file passed under key tire", Status: false})
 	}
 
-	tires := files.File["tire"]
+	tires := files.File["battery"]
 	var images []string
 	for _, file := range tires {
 		id := fmt.Sprint(uuid.New())
@@ -67,7 +67,7 @@ func UploadTireImage(c *fiber.Ctx) error {
 	}
 
 	ctx := context.Background()
-	err = services.InsertTireImages(ctx, images)
+	err = services.InsertBatteryImages(ctx, images)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(model.Response{Message: "Failed to save the images id", Status: false})
 	}

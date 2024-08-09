@@ -24,7 +24,7 @@ func InsertTire(ctx context.Context, tire model.InsertTire) error {
 	return err
 }
 
-func InsertImages(ctx context.Context, images []string) error {
+func InsertTireImages(ctx context.Context, images []string) error {
 	qry := fmt.Sprintf(query.InsertTireImage, images)
 	err := database.Conn.Exec(ctx, qry)
 	return err
