@@ -16,8 +16,9 @@ func InsertUser(ctx context.Context, user model.User) error {
 	return err
 }
 
-func GetUser(ctx context.Context, employee_id string) (model.GetUser, error) {
-	var user model.GetUser
-	err := database.Conn.Select(ctx, &user, query.GetUser, employee_id)
+func GetUser(ctx context.Context, employee_id string) (model.User, error) {
+	var user model.User
+	qry := fmt.Sprintf(query.GetUser, employee_id)
+	err := database.Conn.QueryRow(ctx, qry).ScanStruct(&user)
 	return user, err
 }

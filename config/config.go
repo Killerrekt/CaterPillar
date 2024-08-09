@@ -9,6 +9,7 @@ type Config struct {
 	CloudinaryCloud    string `mapstructure:"CLOUDINARY_CLOUD"`
 	CloudinaryPrivate  string `mapstructure:"CLOUDINARY_PRIVATE"`
 	CloudinaryPublic   string `mapstructure:"CLOUDINARY_PUBLIC"`
+	AccessTokenSecret  string `mapstructure:"ACCESS_SECRET"`
 }
 
 var ConfigData Config
