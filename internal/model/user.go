@@ -1,7 +1,12 @@
 package model
 
 type User struct {
-	Name       string `validate:"required" bson:"Name" json:"name"`
-	Password   string `validate:"required" bson:"Password" json:"password"`
-	EmployeeID string `validate:"required" bson:"EmployeeID" json:"employee_id"`
+	Name       string `validate:"required" json:"name"`
+	Password   string `validate:"required" json:"password"`
+	EmployeeID string `validate:"required" json:"employee_id"`
+}
+
+type GetUser struct {
+	Name       string `json:"name"`
+	EmployeeID string `json:"employee_id"`
 }

@@ -5,6 +5,7 @@ import "github.com/spf13/viper"
 type Config struct {
 	ClickhouseURI      string `mapstructure:"CLICKHOUSE_URI"`
 	ClickhousePassword string `mapstructure:"CLICKHOUSE_PASSWORD"`
+	ClickhouseDatabase string `mapstructure:"CLICKHOUSE_DATABASE"`
 	CloudinaryCloud    string `mapstructure:"CLOUDINARY_CLOUD"`
 	CloudinaryPrivate  string `mapstructure:"CLOUDINARY_PRIVATE"`
 	CloudinaryPublic   string `mapstructure:"CLOUDINARY_PUBLIC"`

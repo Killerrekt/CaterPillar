@@ -9,19 +9,3 @@ services:
     env_file:
       - .env
     restart: on-failure
-    depends_on:
-      - cassandra
-
-  cassandra:
-    image: cassandra:latest
-    container_name: cassandra-container
-    ports:
-      - "9042:9042"
-    environment:
-      - CASSANDRA_USER=admin
-      - CASSANDRA_PASSWORD=admin
-    volumes:
-      - cassandra-data:/var/lib/cassandra
-
-volumes:
-  cassandra-data:
