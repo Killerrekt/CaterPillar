@@ -19,10 +19,10 @@ func CreateCloudinaryClient() (err error) {
 	return
 }
 
-func UploadImage(file multipart.File) (string, error) {
+func UploadImage(file *multipart.FileHeader, key string) (string, error) {
 	ctx := context.Background()
 	res, err := CloudinaryClient.Upload.Upload(ctx, file, uploader.UploadParams{
-		PublicID:       "some name",
+		PublicID:       key,
 		UniqueFilename: api.Bool(false),
 		Overwrite:      api.Bool(true)})
 	return res.URL, err
