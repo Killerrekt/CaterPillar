@@ -1,10 +1,10 @@
 package query
 
 const CreateUserTable = `CREATE TABLE IF NOT EXISTS users 
-					(Name string not null,Password string not null,EmployeeID string not null unique)
+					(Name String not null,Password String not null,EmployeeID String not null)
 					ENGINE = MergeTree()
-					PRIMARY KEY (employee_id)`
+					PRIMARY KEY (EmployeeID)`
 
 const InsertUser = `INSERT INTO users (%s,%s,%d)`
 
-const GetUser = `SELECT name, employee_id FROM users WHERE employee_id = %d`
+const GetUser = `SELECT Name, EmployeeID FROM users WHERE EmployeeID = %d`

@@ -1,6 +1,7 @@
 package database
 
 import (
+	"crypto/tls"
 	"fmt"
 	"time"
 
@@ -29,6 +30,9 @@ func ConnectToDB() (err error) {
 		Compression: &clickhouse.Compression{
 			Method: clickhouse.CompressionLZ4,
 		},
+		TLS: &tls.Config{
+			InsecureSkipVerify: true,
+		},
 		DialTimeout:          time.Second * 30,
 		MaxOpenConns:         5,
 		MaxIdleConns:         5,
@@ -37,5 +41,9 @@ func ConnectToDB() (err error) {
 		BlockBufferSize:      10,
 		MaxCompressionBuffer: 10240,
 	})
+	if err != nil {
+		return
+	}
+	defer Conn.Close()
 	return
 }
