@@ -42,6 +42,7 @@ func main() {
 	log.Println("Migration has run successfully")
 
 	routes.UserRoute(app)
+	routes.HeaderRoute(app)
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
