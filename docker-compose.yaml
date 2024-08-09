@@ -9,24 +9,19 @@ services:
     env_file:
       - .env
     restart: on-failure
+    depends_on:
+      - cassandra
 
-  scylla:
-    image: scylladb/scylla:latest
-    container_name: scylla-node
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra-container
     ports:
       - "9042:9042"
-      - "9180:9180"
+    environment:
+      - CASSANDRA_USER=admin
+      - CASSANDRA_PASSWORD=admin
     volumes:
-      - scylla-data:/var/lib/scylla
-      - scylla-logs:/var/log/scylla
-    command: --smp 1 --memory 1G --overprovisioned 1
-    networks:
-      - scylla-net
+      - cassandra-data:/var/lib/cassandra
 
 volumes:
-  scylla-data:
-  scylla-logs:
-
-networks:
-  scylla-net:
-    driver: bridge
+  cassandra-data:
