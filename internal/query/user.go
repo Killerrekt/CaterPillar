@@ -5,6 +5,6 @@ const CreateUserTable = `CREATE TABLE IF NOT EXISTS users
 					ENGINE = MergeTree()
 					PRIMARY KEY (EmployeeID)`
 
-const InsertUser = `INSERT INTO users (%s,%s,%d)`
+const InsertUser = `INSERT INTO users VALUES('%s','%s','%s')`
 
-const GetUser = `SELECT Name, EmployeeID FROM users WHERE EmployeeID = %d`
+const GetUser = `SELECT Name, EmployeeID FROM users WHERE EmployeeID = %s`

@@ -7,6 +7,7 @@ import (
 
 	"github.com/ScoobieNoobie/Caterpillar/config"
 	"github.com/ScoobieNoobie/Caterpillar/internal/database"
+	"github.com/ScoobieNoobie/Caterpillar/internal/routes"
 	"github.com/ScoobieNoobie/Caterpillar/internal/utils"
 	"github.com/gofiber/fiber/v2"
 )
@@ -39,6 +40,8 @@ func main() {
 		log.Fatalln("Failed to run the migrations " + err.Error())
 	}
 	log.Println("Migration has run successfully")
+
+	routes.UserRoute(app)
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
