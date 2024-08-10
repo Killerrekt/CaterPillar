@@ -8,6 +8,7 @@ import (
 
 func BatteryRoute(app *fiber.App) {
 	app.Post("/create-battery", middleware.AuthenticateAndAuthorizeUser(), controller.InsertBattery)
-	app.Post("/battery/images", middleware.AuthenticateAndAuthorizeUser(), controller.UploadBatteryImage)
-	app.Get("/batter/:inspection_id", middleware.AuthenticateAndAuthorizeUser(), controller.GetBattery)
+	app.Post("/battery/images/:inspection_id", middleware.AuthenticateAndAuthorizeUser(), controller.UploadBatteryImage)
+	app.Get("/battery/:inspection_id", middleware.AuthenticateAndAuthorizeUser(), controller.GetBattery)
+	app.Get("/battery/images/:inspection_id", middleware.AuthenticateAndAuthorizeUser(), controller.GetBatteryImages)
 }

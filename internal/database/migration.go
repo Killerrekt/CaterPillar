@@ -19,5 +19,9 @@ func RunMigration(ctx context.Context) (err error) {
 	if err != nil {
 		return
 	}
+	err = Conn.Exec(ctx, query.CreateBatteryTable)
+	if err != nil {
+		return
+	}
 	return
 }

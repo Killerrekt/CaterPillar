@@ -22,8 +22,13 @@ func InsertBattery(ctx context.Context, battery model.InsertBattery) error {
 	return err
 }
 
-func InsertBatteryImages(ctx context.Context, images []string) error {
-	qry := fmt.Sprintf(query.InsertBatteryImages, images)
+func InsertBatteryImages(ctx context.Context, images []string, id uint32) error {
+	s := "["
+	for _, v := range images {
+		s += "'" + v + "',"
+	}
+	new := s[:len(s)-1] + "]"
+	qry := fmt.Sprintf(query.InsertBatteryImages, new, id)
 	err := database.Conn.Exec(ctx, qry)
 	return err
 }

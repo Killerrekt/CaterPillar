@@ -6,9 +6,9 @@ type Battery struct {
 	BatteryReplacementDate string   `json:"battery_replacement_date" validate:"required"`
 	BatteryVoltage         uint32   `json:"battery_voltage" validate:"required"`
 	BatteryWaterlevel      string   `json:"battery_water_level" validate:"required"`
-	ConditionOfBattery     string   `json:"condition_of_battery" validate:"required"`
+	ConditionOfBattery     bool     `json:"condition_of_battery" validate:"required"`
 	RustInBattery          bool     `json:"rust_in_battery" validate:"required"`
-	BatterySummary         bool     `json:"battery_in_summary" validate:"required"`
+	BatterySummary         string   `json:"battery_in_summary" validate:"required"`
 	BatteryImages          []string `json:"battery_images" validate:"required"`
 }
 
