@@ -9,7 +9,7 @@ import (
 	"github.com/ScoobieNoobie/Caterpillar/internal/query"
 )
 
-func GetHeader(ctx context.Context, employee_id string) (header model.Header, err error) {
+func GetHeader(ctx context.Context, employee_id string) (header model.GetHeader, err error) {
 	qry := fmt.Sprintf(query.GetHeader, employee_id)
 	err = database.Conn.QueryRow(ctx, qry).ScanStruct(&header)
 	return
@@ -24,7 +24,8 @@ func InsertHeader(ctx context.Context, header model.CreateHeader) (err error) {
 		header.InspectorEmployeeID,
 		header.Location,
 		header.ClientID,
-		header.ClientName)
+		header.ClientName,
+		fmt.Sprint(header.Service))
 	err = database.Conn.Exec(ctx, qry)
 	return
 }

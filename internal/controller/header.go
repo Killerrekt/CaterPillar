@@ -6,6 +6,7 @@ import (
 
 	"github.com/ScoobieNoobie/Caterpillar/internal/model"
 	"github.com/ScoobieNoobie/Caterpillar/internal/services"
+	"github.com/ScoobieNoobie/Caterpillar/internal/utils"
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
 )
@@ -16,6 +17,10 @@ func GetHeader(c *fiber.Ctx) error {
 	header, err := services.GetHeader(ctx, emp_id)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(model.Response{Message: "There is no header for this inspector", Status: false})
+	}
+	header.Image, err = utils.GetImage("/model/" + header.TruckSerialNumber)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(model.Response{Message: "Failed to get the images", Status: false})
 	}
 	return c.Status(fiber.StatusAccepted).JSON(model.Response{Message: "Successfully fetch the header for the inspector", Status: true, Data: header})
 }

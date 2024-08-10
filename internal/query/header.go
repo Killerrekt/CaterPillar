@@ -9,10 +9,11 @@ const CreateHeaderTable = `CREATE TABLE IF NOT EXISTS header(
 							DateAndTime DateTime not null,
 							Location String not null,
 							ClientName String not null,
-							ClientID String not null)
+							ClientID String not null,
+							Service Bool not null)
 							ENGINE = MergeTree()
 							PRIMARY KEY (InspectionID, DateAndTime)`
 
 const GetHeader = `SELECT * FROM header WHERE InspectorEmployeeID = '%s' LIMIT 1`
 
-const InsertHeader = `INSERT INTO header VALUES('%s','%s','%d','%s','%s',now(),'%s','%s','%s')`
+const InsertHeader = `INSERT INTO header VALUES('%s','%s','%d','%s','%s',now(),'%s','%s','%s',%s)`
