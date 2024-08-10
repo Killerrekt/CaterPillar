@@ -15,6 +15,6 @@ ADD . .
 
 RUN go install -mod=mod github.com/githubnemo/CompileDaemon
 
-EXPOSE 8080
+EXPOSE 10000
 
 ENTRYPOINT CompileDaemon --build="go build cmd/main.go" --command=./main
