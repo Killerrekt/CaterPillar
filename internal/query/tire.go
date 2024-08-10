@@ -1,6 +1,6 @@
 package query
 
-const CreateTireTable = `CREATE TABLE tire(
+const CreateTireTable = `CREATE TABLE IF NOT EXISTS tire(
 						InspectionID UInt32 not null,
 						TirePressureLeftFront UInt32 not null,
 						TirePressureRightFront UInt32 not null,
@@ -27,6 +27,8 @@ const InsertTire = `INSERT INTO tire(InspectionID,
 						TireSummary) 
 						VALUES(%d,%d,%d,%d,%d,'%s','%s','%s','%s','%s')`
 
-const InsertTireImage = `INSERT INTO tire(Images) VALUES(%v)`
+const InsertTireImage = `ALTER TABLE tire UPDATE Images = %s WHERE InspectionID = %d`
+
+const GetTireImage = `SELECT Images FROM tire WHERE InspectionID = %d`
 
 const GetTire = `SELECT * FROM tire WHERE InspectionID = %d`

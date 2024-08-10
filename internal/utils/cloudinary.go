@@ -2,12 +2,12 @@ package utils
 
 import (
 	"context"
+	"fmt"
 	"mime/multipart"
 
 	"github.com/ScoobieNoobie/Caterpillar/config"
 	"github.com/cloudinary/cloudinary-go/v2"
 	"github.com/cloudinary/cloudinary-go/v2/api"
-	"github.com/cloudinary/cloudinary-go/v2/api/admin"
 	"github.com/cloudinary/cloudinary-go/v2/api/uploader"
 )
 
@@ -29,9 +29,11 @@ func UploadImage(file *multipart.FileHeader, key string) (string, error) {
 }
 
 func GetImage(key string) (string, error) {
-	ctx := context.Background()
-	res, err := CloudinaryClient.Admin.Asset(ctx, admin.AssetParams{
-		PublicID: key,
-	})
-	return res.URL, err
+	res, err := CloudinaryClient.Image(key)
+	if err != nil {
+		return "", err
+	}
+	url, err := res.String()
+	fmt.Println("url : ", url)
+	return url, err
 }
