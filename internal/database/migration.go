@@ -27,5 +27,13 @@ func RunMigration(ctx context.Context) (err error) {
 	if err != nil {
 		return
 	}
+	err = Conn.Exec(ctx, query.CreateBrakeTable)
+	if err != nil {
+		return
+	}
+	err = Conn.Exec(ctx, query.CreateEngineTable)
+	if err != nil {
+		return
+	}
 	return
 }

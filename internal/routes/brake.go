@@ -9,5 +9,5 @@ import (
 func BrakeRoute(app *fiber.App) {
 	app.Post("/create-brake", middleware.AuthenticateAndAuthorizeUser(), controller.CreateBrake)
 	app.Post("/brake/image/:inspection_id", middleware.AuthenticateAndAuthorizeUser(), controller.AddBrakeImages)
-	app.Get("/tire/:inspection_id", middleware.AuthenticateAndAuthorizeUser(), controller.GetBrake)
+	app.Get("/brake/:inspection_id", middleware.AuthenticateAndAuthorizeUser(), controller.GetBrake)
 }

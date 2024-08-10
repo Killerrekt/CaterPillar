@@ -45,6 +45,7 @@ func main() {
 	routes.HeaderRoute(app)
 	routes.TireRoute(app)
 	routes.BatteryRoute(app)
+	routes.EngineRoute(app)
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
